@@ -1,3 +1,12 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "semi": ["error", "always", { "omitLastInOneLineBlock": true }],
+    "quotes": ["error", "single", "avoid-escape"],
+    "object-curly-spacing": ["error", "always"],
+    "func-call-spacing": ["error", "never"],
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    "space-before-blocks": ["error", "always"],
+    "keyword-spacing": ["error", { "before": true, "after": true }]
+  }
 }

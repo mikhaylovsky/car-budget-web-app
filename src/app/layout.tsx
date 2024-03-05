@@ -3,6 +3,8 @@ import { Rubik } from 'next/font/google';
 import '@/app/globals.css';
 import StoreProvider from '@/app/StoreProvider';
 import React from 'react';
+import { ClerkProvider } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
 
 const font = Rubik({ subsets: ['latin'] });
 
@@ -17,12 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={font.className}>
-        <StoreProvider>
-          {children}
-        </StoreProvider>
-      </body>
-    </html>
+    <ClerkProvider appearance={{ baseTheme: dark, variables: { colorPrimary: 'red', colorBackground: 'rgb(55,65,81)' } }}>
+      <html lang="en">
+        <body className={`${font.className} flex min-h-screen justify-center items-center`}>
+          <StoreProvider>
+            {children}
+          </StoreProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

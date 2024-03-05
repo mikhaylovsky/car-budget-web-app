@@ -3,7 +3,7 @@ import { pageReducer } from '@/lib/slices/page';
 import { authReducer } from '@/lib/slices/auth';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
-import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 const authPersistConfig = {
   key: 'auth',

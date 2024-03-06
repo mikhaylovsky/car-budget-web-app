@@ -1,30 +1,36 @@
 'use client';
 
-import { useAppSelector } from '@/lib/store';
-import { useRouter } from 'next/navigation';
-import { ArrowLeftIcon } from '@heroicons/react/24/solid';
+import { useAppSelector, useAppDispatch } from '@/store/store';
+import { setSidebarState } from '@/store/slices/settings';
+import { Bars3BottomLeftIcon } from '@heroicons/react/24/solid';
 import { BellIcon, SunIcon } from '@heroicons/react/24/outline';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { UserButton } from '@clerk/nextjs';
 
 export default function ProfileBar() {
-  // const pageName = useAppSelector((state) => state.page.title);
-  // const user = useAppSelector((state) => state.auth.user);
-  // const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const [currentPageTitle, setPageTitle] = React.useState();
+  const pageTitle = useAppSelector((state) => state.settings.pageTitle);
 
-  const router = useRouter();
-  const [profileOpened, setProfileOpened] = React.useState(false);
-  const toggleProfile = () => {
-    setProfileOpened(!profileOpened);
-  };
+  const sidebarOpened = useAppSelector((state) => state.settings.sidebarOpened);
+  const [sidebarState, setSidebarOpened] = React.useState(sidebarOpened);
+
+  useEffect(() => {
+    setPageTitle(pageTitle);
+  }, [pageTitle]);
+
+  useEffect(() => {
+    setSidebarOpened(sidebarOpened);
+  }, [sidebarOpened]);
+
+  const dispatch = useAppDispatch();
 
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center page-title">
-        <button onClick={router.back} className="mx-2 transition-all hover:-translate-x-0.5">
-          <ArrowLeftIcon className="h-4 w-4" />
+        <button onClick={() => dispatch(setSidebarState(!sidebarState))} className="md:hidden mx-2 transition-all hover:-translate-x-0.5">
+          <Bars3BottomLeftIcon className="h-4 w-4" />
         </button>
-        <p className="text-xl font-semibold">Rest</p>
+        <p className="text-xl font-semibold">{ currentPageTitle }</p>
       </div>
 
       <div className="flex items-center">

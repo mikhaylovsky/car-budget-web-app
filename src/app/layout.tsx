@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Rubik } from 'next/font/google';
 import '@/app/globals.css';
-import StoreProvider from '@/app/StoreProvider';
+import StoreProvider from '@/store/StoreProvider';
 import React from 'react';
 import { ClerkProvider } from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
+import { Appearance } from '@clerk/types/dist/appearance';
 
 const font = Rubik({ subsets: ['latin'] });
 
@@ -18,10 +19,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const clerkAppearanceSettings: Appearance = {
+    baseTheme: dark,
+    variables: {
+      colorPrimary: 'red',
+      colorBackground: 'rgb(55,65,81)'
+    },
+  };
+
   return (
-    <ClerkProvider appearance={{ baseTheme: dark, variables: { colorPrimary: 'red', colorBackground: 'rgb(55,65,81)' } }}>
+    <ClerkProvider appearance={clerkAppearanceSettings}>
       <html lang="en">
-        <body className={`${font.className} flex min-h-screen justify-center items-center`}>
+        <body className={`${font.className} min-h-screen`}>
           <StoreProvider>
             {children}
           </StoreProvider>

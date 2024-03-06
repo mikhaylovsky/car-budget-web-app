@@ -1,11 +1,15 @@
 'use client';
 
-import { useAppDispatch } from '@/lib/store';
-import { setPageTitle } from '@/lib/slices/page';
+import { useAppDispatch } from '@/store/store';
+import { setPageTitle } from '@/store/slices/settings';
+import { useEffect } from 'react';
 
 export default function Income() {
   const dispatch = useAppDispatch();
-  dispatch(setPageTitle('Income'));
+
+  useEffect(() => {
+    dispatch(setPageTitle('Income'));
+  }, [dispatch]);
 
   return;
 }

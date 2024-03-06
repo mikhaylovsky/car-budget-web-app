@@ -1,18 +1,9 @@
 import { combineReducers, configureStore, Reducer } from '@reduxjs/toolkit';
-import { pageReducer } from '@/lib/slices/page';
-import { authReducer } from '@/lib/slices/auth';
-import storage from 'redux-persist/lib/storage';
-import { persistReducer } from 'redux-persist';
+import { settingsStoreReducer } from '@/store/slices/settings';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-const authPersistConfig = {
-  key: 'auth',
-  storage: storage,
-};
-
 const reducer: Reducer = combineReducers({
-  auth: persistReducer(authPersistConfig, authReducer),
-  page: pageReducer,
+  settings: settingsStoreReducer,
 });
 
 export const store = configureStore({

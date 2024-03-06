@@ -1,11 +1,15 @@
 'use client';
 
-import { useAppDispatch } from '@/lib/store';
-import { setPageTitle } from '@/lib/slices/page';
+import { useAppDispatch } from '@/store/store';
+import { setPageTitle } from '@/store/slices/settings';
+import { useEffect } from 'react';
 
 export default function Dashboard() {
   const dispatch = useAppDispatch();
-  dispatch(setPageTitle('Dashboard'));
+
+  useEffect(() => {
+    dispatch(setPageTitle('Dashboard'));
+  }, [dispatch]);
 
   return;
 }

@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 import routes, { Route } from '@/router';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { setSidebarState } from '@/store/slices/settings';
+import Logo from '@/app/components/Logo';
 
 export default function Sidebar() {
   const currentPath: string = usePathname();
@@ -22,14 +22,7 @@ export default function Sidebar() {
     <aside className={`fixed top-0 left-0 z-40 w-80 h-screen transition-transform -translate-x-${sidebarState ? '0' : 'full'} p-4 sm:translate-x-0`}>
       <section className="sidebar h-full px-2 py-8 bg-white dark:bg-gray-800 rounded-xl">
         <div className="flex items-center justify-center p-6 ">
-          <Image
-            src="/vercel.svg"
-            alt="Vercel Logo"
-            className="dark:invert"
-            width={100}
-            height={24}
-            priority
-          />
+          <Logo height={30} width={100} />
         </div>
         <nav className="flex flex-col mt-12">
           <ul>

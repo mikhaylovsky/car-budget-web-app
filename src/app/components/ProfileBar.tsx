@@ -3,9 +3,10 @@
 import { useAppSelector, useAppDispatch } from '@/store/store';
 import { setSidebarState } from '@/store/slices/settings';
 import { Bars3BottomLeftIcon } from '@heroicons/react/24/solid';
-import { BellIcon, SunIcon } from '@heroicons/react/24/outline';
+import { BellIcon } from '@heroicons/react/24/outline';
 import React, { useEffect } from 'react';
 import { UserButton } from '@clerk/nextjs';
+import ThemeSwitcher from '@/app/components/ThemeSwitcher';
 
 export default function ProfileBar() {
   const [currentPageTitle, setPageTitle] = React.useState();
@@ -35,13 +36,11 @@ export default function ProfileBar() {
 
       <div className="flex items-center">
         <div className="px-2">
-          <button className="rounded-full transition-all hover:bg-white hover:shadow-md p-2">
-            <SunIcon className="h-6 w-6 text-gray-800 dark:text-gray-300" />
-          </button>
+          <ThemeSwitcher />
         </div>
         <div className="px-2">
-          <button className="rounded-full transition-all hover:bg-white hover:shadow-md p-2">
-            <BellIcon className="h-6 w-6 text-gray-800 dark:text-gray-300" />
+          <button className="group rounded-full transition-all hover:bg-white hover:shadow-md p-2 dark:hover:bg-gray-700">
+            <BellIcon className="h-6 w-6 text-gray-800 dark:text-gray-300 group-hover:text-blue-500 transition-colors" />
           </button>
         </div>
         <div className="px-2">

@@ -1,13 +1,8 @@
 import type { Metadata } from 'next';
-import { Rubik } from 'next/font/google';
 import '@/app/globals.css';
-import StoreProvider from '@/store/StoreProvider';
 import React from 'react';
-import { ClerkProvider } from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
-import { Appearance } from '@clerk/types/dist/appearance';
-
-const font = Rubik({ subsets: ['latin'] });
+import AppProvider from '@/app/AppProvider';
+import { defaultFont } from '@/app/utils';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,23 +14,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const clerkAppearanceSettings: Appearance = {
-    baseTheme: dark,
-    variables: {
-      colorPrimary: 'red',
-      colorBackground: 'rgb(55,65,81)'
-    },
-  };
-
   return (
-    <ClerkProvider appearance={clerkAppearanceSettings}>
-      <html lang="en">
-        <body className={`${font.className} min-h-screen`}>
-          <StoreProvider>
-            {children}
-          </StoreProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${defaultFont.className} min-h-screen`}>
+        <AppProvider>
+          {children}
+        </AppProvider>
+      </body>
+    </html>
   );
 }
